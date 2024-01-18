@@ -2,7 +2,7 @@
 
 <img src="https://github.com/twozeronine/oban-exporter/assets/67315288/7a966ffa-015b-432e-9af0-82369311873c" width="65%" height="65%">
 
-디자이너와 협업하여 사용할 수 있는 오브젝트 배치 툴
+디자이너와 협업하여 사용할 수 있는 유니티 전용 오브젝트 배치 툴
 
 ---
 
