@@ -7,9 +7,7 @@ using Newtonsoft.Json;
 public class ClickToPlace : EditorWindow
 {
     public Vector3 basicPos = new Vector3(0, 0, 0);
-    public float offsetX = 0f;
-    public float offsetY = 0f;
-    public float offsetZ = 0f;
+    public Vector3 offsetPos = new Vector3(0, 0, 0);
     public GameObject targetPrefab;
     public string jsonFilePath = "";
     public string saveFileName = "";
@@ -33,11 +31,12 @@ public class ClickToPlace : EditorWindow
 
         // Fields
         basicPos = EditorGUILayout.Vector3Field("Basic Position", basicPos);
-        offsetX = EditorGUILayout.FloatField("X Offset", offsetX);
-        offsetY = EditorGUILayout.FloatField("Y Offset", offsetY);
-        offsetZ = EditorGUILayout.FloatField("Z Offset", offsetZ);
+        EditorGUILayout.Space();
+        offsetPos = EditorGUILayout.Vector3Field("Offset", offsetPos);
+        EditorGUILayout.Space();
         targetPrefab = EditorGUILayout.ObjectField("Target Prefab", targetPrefab, typeof(GameObject), false) as GameObject;
-
+        EditorGUILayout.Space();
+        
         // Load From JSON
         GUILayout.BeginHorizontal();
         EditorGUILayout.LabelField("JSON File Path: ");
@@ -84,7 +83,7 @@ public class ClickToPlace : EditorWindow
     {
         foreach (var position in objects)
         {
-            Vector3 objectPosition = new Vector3(basicPos.x + position.x * offsetX, basicPos.y + position.y * offsetY, basicPos.z + position.z * offsetZ);
+            Vector3 objectPosition = new Vector3(basicPos.x + position.x * offsetPos.x, basicPos.y + position.y * offsetPos.y, basicPos.z + position.z * offsetPos.z);
             
             GameObject createdObject = Instantiate(targetPrefab, objectPosition, Quaternion.identity);
 
