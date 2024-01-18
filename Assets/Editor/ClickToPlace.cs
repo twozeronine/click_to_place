@@ -12,6 +12,7 @@ public class ClickToPlace : EditorWindow
     public float offsetZ = 0f;
     public GameObject targetPrefab;
     public string jsonFilePath = "";
+    public string saveFileName = "";
     private List<Vector3> objects = new List<Vector3>();
     private List<GameObject> instantiatedObjects = new List<GameObject>();
 
@@ -26,23 +27,35 @@ public class ClickToPlace : EditorWindow
         Color defaultContentColor = GUI.contentColor;
         Color defaultBackgroundColor = GUI.backgroundColor;
 
+        // Title
         GUILayout.Label("Click To Place", EditorStyles.boldLabel);
 
+        // Fields
         basicPos = EditorGUILayout.Vector3Field("Basic Position", basicPos);
         offsetX = EditorGUILayout.FloatField("X Offset", offsetX);
         offsetY = EditorGUILayout.FloatField("Y Offset", offsetY);
         offsetZ = EditorGUILayout.FloatField("Z Offset", offsetZ);
-
         targetPrefab = EditorGUILayout.ObjectField("Target Prefab", targetPrefab, typeof(GameObject), false) as GameObject;
 
+        // Load From JSON
         GUILayout.BeginHorizontal();
         EditorGUILayout.LabelField("JSON File Path: ");
         jsonFilePath = EditorGUILayout.TextField(jsonFilePath);
         EditorGUILayout.Space();
         CreateGUILayoutButton("Load From JSON", () => LoadFromJson(jsonFilePath), Color.white, Color.magenta); 
         GUILayout.EndHorizontal();
-
         EditorGUILayout.Space();
+
+        // Save Objects to JSON
+        GUILayout.BeginHorizontal();
+        EditorGUILayout.LabelField("Save File Name: ");
+        saveFileName = EditorGUILayout.TextField(saveFileName);
+        EditorGUILayout.Space();
+        CreateGUILayoutButton("Save to JSON", () => SaveToJSON(saveFileName), Color.white, Color.cyan); 
+        GUILayout.EndHorizontal();
+        EditorGUILayout.Space();
+
+        // Add Object
         CreateGUILayoutButton("Add Object", () => objects.Add(Vector3.zero), Color.white, Color.green); 
         ClearStyle(defaultContentColor, defaultBackgroundColor);
         
@@ -96,6 +109,22 @@ public class ClickToPlace : EditorWindow
 
         objects = JsonConvert.DeserializeObject<List<Vector3>>(textAsset.text);
     }
+
+    private void SaveToJSON(string fileName)
+    {
+        var listVec3 = VectorConverter.ConvertUnityVectoVec3(objects);
+        
+        JsonSerializerSettings jsonSettings = new JsonSerializerSettings
+        {
+            ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+        };
+
+        string json = JsonConvert.SerializeObject(listVec3, Formatting.Indented, jsonSettings);
+
+        string filePath = $"Assets/Resources/{fileName}.json";
+        System.IO.File.WriteAllText(filePath, json);
+    }
+
     private void CreateGUILayoutButton(string guiName, Action func, Color contentColor, Color BackgroundColor)
     {
         GUI.contentColor = contentColor;
