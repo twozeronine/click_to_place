@@ -36,7 +36,7 @@ public class ClickToPlace : EditorWindow
         EditorGUILayout.Space();
         targetPrefab = EditorGUILayout.ObjectField("Target Prefab", targetPrefab, typeof(GameObject), false) as GameObject;
         EditorGUILayout.Space();
-        
+
         // Load From JSON
         GUILayout.BeginHorizontal();
         EditorGUILayout.LabelField("JSON File Path: ");
@@ -72,6 +72,7 @@ public class ClickToPlace : EditorWindow
         }
         EditorGUILayout.EndScrollView();
 
+        // Create Clear
         GUILayout.BeginHorizontal();
         CreateGUILayoutButton("Create", () => CreateObject(), Color.white, Color.green); 
         CreateGUILayoutButton("Clear", () => ClearObjects(), Color.white, Color.red); 
