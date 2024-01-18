@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEditor;
 using System.Collections.Generic;
 using System;
+using Newtonsoft.Json;
 
 public class ClickToPlace : EditorWindow
 {
@@ -10,6 +11,7 @@ public class ClickToPlace : EditorWindow
     public float offsetY = 0f;
     public float offsetZ = 0f;
     public GameObject targetPrefab;
+    public string jsonFilePath = "";
     private List<Vector3> objects = new List<Vector3>();
     private List<GameObject> instantiatedObjects = new List<GameObject>();
 
@@ -33,9 +35,17 @@ public class ClickToPlace : EditorWindow
 
         targetPrefab = EditorGUILayout.ObjectField("Target Prefab", targetPrefab, typeof(GameObject), false) as GameObject;
 
+        GUILayout.BeginHorizontal();
+        EditorGUILayout.LabelField("JSON File Path: ");
+        jsonFilePath = EditorGUILayout.TextField(jsonFilePath);
+        EditorGUILayout.Space();
+        CreateGUILayoutButton("Load From JSON", () => LoadFromJson(jsonFilePath), Color.white, Color.magenta); 
+        GUILayout.EndHorizontal();
+
+        EditorGUILayout.Space();
         CreateGUILayoutButton("Add Object", () => objects.Add(Vector3.zero), Color.white, Color.green); 
         ClearStyle(defaultContentColor, defaultBackgroundColor);
-
+        
         for (int i = 0; i < objects.Count; i++)
         {
             GUILayout.BeginHorizontal();
@@ -76,6 +86,16 @@ public class ClickToPlace : EditorWindow
         instantiatedObjects.Clear();
     }
 
+    private void LoadFromJson(string path)
+    {
+        TextAsset textAsset = Resources.Load<TextAsset>(path);
+        
+        if( textAsset == null ) return;
+
+        objects.Clear();
+
+        objects = JsonConvert.DeserializeObject<List<Vector3>>(textAsset.text);
+    }
     private void CreateGUILayoutButton(string guiName, Action func, Color contentColor, Color BackgroundColor)
     {
         GUI.contentColor = contentColor;
