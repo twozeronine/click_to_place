@@ -15,6 +15,7 @@ public class ClickToPlace : EditorWindow
     public string saveFileName = "";
     private List<Vector3> objects = new List<Vector3>();
     private List<GameObject> instantiatedObjects = new List<GameObject>();
+    private Vector2 scrollPosition = Vector2.zero;
 
     [MenuItem("Window/Click To Place")]
     public static void ShowWindow()
@@ -58,7 +59,7 @@ public class ClickToPlace : EditorWindow
         // Add Object
         CreateGUILayoutButton("Add Object", () => objects.Add(Vector3.zero), Color.white, Color.green); 
         ClearStyle(defaultContentColor, defaultBackgroundColor);
-        
+        scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition, GUILayout.Height(800));
         for (int i = 0; i < objects.Count; i++)
         {
             GUILayout.BeginHorizontal();
@@ -70,6 +71,7 @@ public class ClickToPlace : EditorWindow
             }
             GUILayout.EndHorizontal();
         }
+        EditorGUILayout.EndScrollView();
 
         GUILayout.BeginHorizontal();
         CreateGUILayoutButton("Create", () => CreateObject(), Color.white, Color.green); 
