@@ -1,32 +1,44 @@
 # '딸각' 배치
 
+<img src="https://github.com/twozeronine/oban-exporter/assets/67315288/7a966ffa-015b-432e-9af0-82369311873c" width="65%" height="65%">
+
 디자이너와 협업하여 사용할 수 있는 오브젝트 배치 툴
+
+---
 
 # 사용 방법
 
 1. 프리팹을 세팅하세요
 
-![image](https://github.com/twozeronine/oban-exporter/assets/67315288/45f41399-1028-46fe-9dbc-a1b052670935)
+![image](https://github.com/twozeronine/oban-exporter/assets/67315288/6e298e03-10a4-4007-93d3-faf55e06893d)
 
 드래그 앤 드롭으로 생성될 오브젝트를 설정해줍니다.
+
+---
 
 2. 생성될 좌표지점과 각 오브젝트 끼리의 간격인 Offset을 입력해주세요
 
 ![image](https://github.com/twozeronine/oban-exporter/assets/67315288/88b6c718-9538-4f0c-b016-841bc4ee7df9)
 
+---
+
 3. Object가 추가될 좌표를 입력해주세요
 
 ![image](https://github.com/twozeronine/oban-exporter/assets/67315288/51e95d23-272e-41e9-8090-076dd71ce47c)
 
-Create 버튼 클릭 시 오브젝트가 좌표값으로 생성됩니다.
+- Create 버튼 클릭 시 오브젝트가 좌표값으로 생성됩니다.
 
-Clear 클릭 시 생성되었던 모든 오브젝트가 삭제되니 주의해주세요
+- Clear 클릭 시 생성되었던 모든 오브젝트가 삭제되니 주의해주세요
+
+---
 
 4. 저장과 불러오기
 
 ![image](https://github.com/twozeronine/oban-exporter/assets/67315288/34c5acfe-6634-4ac2-90fc-0aa96601e8ff)
 
 세팅한 Object의 좌표값을 JSON 형식으로 저장하고 불러올 수 있습니다.
+
+---
 
 > 추천하는 사용 방법은 아래와 같습니다.
 
