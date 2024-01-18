@@ -10,7 +10,7 @@
 
 1. 프리팹을 세팅하세요
 
-![image](https://github.com/twozeronine/oban-exporter/assets/67315288/6e298e03-10a4-4007-93d3-faf55e06893d)
+![image](https://github.com/twozeronine/oban-exporter/assets/67315288/9fddaf18-6eb3-41e6-9046-b7d2d21cf2c9)
 
 드래그 앤 드롭으로 생성될 오브젝트를 설정해줍니다.
 
@@ -24,7 +24,14 @@
 
 3. Object가 추가될 좌표를 입력해주세요
 
-![image](https://github.com/twozeronine/oban-exporter/assets/67315288/51e95d23-272e-41e9-8090-076dd71ce47c)
+![image](https://github.com/twozeronine/oban-exporter/assets/67315288/7a8e54f6-7d6f-44bd-8483-1d7914696470)
+
+
+---
+
+4. Create 와 Clear 
+
+![image](https://github.com/twozeronine/oban-exporter/assets/67315288/ddaf0b48-c1fb-4044-8d73-a179edfde6af)
 
 - Create 버튼 클릭 시 오브젝트가 좌표값으로 생성됩니다.
 
@@ -32,9 +39,9 @@
 
 ---
 
-4. 저장과 불러오기
+5. 저장과 불러오기
 
-![image](https://github.com/twozeronine/oban-exporter/assets/67315288/34c5acfe-6634-4ac2-90fc-0aa96601e8ff)
+![image](https://github.com/twozeronine/oban-exporter/assets/67315288/4c338dee-9842-4690-96c4-d16cf718ef01)
 
 세팅한 Object의 좌표값을 JSON 형식으로 저장하고 불러올 수 있습니다.
 
