@@ -5,11 +5,12 @@ using System;
 
 public class ClickToPlace : EditorWindow
 {
-    public Vector2 basicPos = new Vector2(0,0);
+    public Vector3 basicPos = new Vector3(0, 0, 0);
     public float offsetX = 0f;
     public float offsetY = 0f;
+    public float offsetZ = 0f;
     public GameObject targetPrefab;
-    private List<Vector2> objects = new List<Vector2>();
+    private List<Vector3> objects = new List<Vector3>();
     private List<GameObject> instantiatedObjects = new List<GameObject>();
 
     [MenuItem("Window/Click To Place")]
@@ -25,19 +26,20 @@ public class ClickToPlace : EditorWindow
 
         GUILayout.Label("Click To Place", EditorStyles.boldLabel);
 
-        basicPos = EditorGUILayout.Vector2Field("Basic Position", basicPos);
+        basicPos = EditorGUILayout.Vector3Field("Basic Position", basicPos);
         offsetX = EditorGUILayout.FloatField("X Offset", offsetX);
         offsetY = EditorGUILayout.FloatField("Y Offset", offsetY);
+        offsetZ = EditorGUILayout.FloatField("Z Offset", offsetZ);
 
         targetPrefab = EditorGUILayout.ObjectField("Target Prefab", targetPrefab, typeof(GameObject), false) as GameObject;
 
-        CreateGUILayoutButton("Add Object", () => objects.Add(Vector2.zero), Color.white, Color.green); 
+        CreateGUILayoutButton("Add Object", () => objects.Add(Vector3.zero), Color.white, Color.green); 
         ClearStyle(defaultContentColor, defaultBackgroundColor);
 
         for (int i = 0; i < objects.Count; i++)
         {
             GUILayout.BeginHorizontal();
-            objects[i] = EditorGUILayout.Vector2Field($"Object Position {i}", objects[i]);
+            objects[i] = EditorGUILayout.Vector3Field($"Object Position {i}", objects[i]);
             if (GUILayout.Button("Remove", GUILayout.Width(60)))
             {
                 objects.RemoveAt(i);
@@ -57,7 +59,7 @@ public class ClickToPlace : EditorWindow
     {
         foreach (var position in objects)
         {
-            Vector3 objectPosition = new Vector3(basicPos.x + position.x * offsetX, basicPos.y + position.y * offsetY, 0);
+            Vector3 objectPosition = new Vector3(basicPos.x + position.x * offsetX, basicPos.y + position.y * offsetY, basicPos.z + position.z * offsetZ);
             
             GameObject createdObject = Instantiate(targetPrefab, objectPosition, Quaternion.identity);
 
