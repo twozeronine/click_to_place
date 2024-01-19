@@ -58,7 +58,7 @@ public class ClickToPlace : EditorWindow
         // Add Object
         CreateGUILayoutButton("Add Object", () => objects.Add(Vector3.zero), Color.white, Color.green); 
         ClearStyle(defaultContentColor, defaultBackgroundColor);
-        scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition, GUILayout.Height(800));
+        scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition, GUILayout.Height(500));
         for (int i = 0; i < objects.Count; i++)
         {
             GUILayout.BeginHorizontal();
@@ -86,7 +86,9 @@ public class ClickToPlace : EditorWindow
         {
             Vector3 objectPosition = new Vector3(basicPos.x + position.x * offsetPos.x, basicPos.y + position.y * offsetPos.y, basicPos.z + position.z * offsetPos.z);
             
-            GameObject createdObject = Instantiate(targetPrefab, objectPosition, Quaternion.identity);
+            GameObject createdObject = PrefabUtility.InstantiatePrefab(targetPrefab) as GameObject;
+
+            createdObject.transform.position = objectPosition;
 
             instantiatedObjects.Add(createdObject);
         }
